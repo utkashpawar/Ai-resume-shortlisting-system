@@ -6,6 +6,9 @@ This project helps recruiters quickly analyze resumes and compare them with job 
 
 The system calculates a skill match score and identifies missing skills. It also integrates with Google Gemini AI to generate advanced analysis.
 
+Live Demo:
+https://utkashpawar.github.io/Ai-resume-shortlisting-system/
+
 ## Features
 
 * Resume upload (.txt)
