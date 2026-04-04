@@ -1,101 +1,105 @@
 <!DOCTYPE html>
-
 <html>
 <head>
 
+<meta charset="UTF-8">
+
 <title>AI Resume Shortlisting System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
 <style>
 
 body{
-font-family:Arial;
-background:linear-gradient(120deg,#6a11cb,#2575fc);
-padding:40px;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#667eea,#764ba2);
+margin:0;
 }
 
 .container{
-background:white;
-padding:30px;
-border-radius:12px;
 max-width:900px;
-margin:auto;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+margin:40px auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
 }
 
 h2{
 text-align:center;
-color:#333;
-}
-
-.description{
-background:#f4f4f4;
-padding:15px;
-border-radius:8px;
 margin-bottom:20px;
 }
 
-textarea{
+input,textarea{
 width:100%;
-height:120px;
-margin-top:10px;
-margin-bottom:20px;
 padding:10px;
-border-radius:6px;
+margin:10px 0;
+border-radius:8px;
 border:1px solid #ccc;
 }
 
-.upload{
-border:2px dashed #2575fc;
-padding:20px;
-text-align:center;
-border-radius:8px;
-margin-bottom:20px;
-cursor:pointer;
-color:#2575fc;
-}
-
-.upload:hover{
-background:#f0f4ff;
+textarea{
+height:120px;
 }
 
 button{
 padding:12px 20px;
 border:none;
-border-radius:6px;
-background:#2575fc;
+border-radius:8px;
+background:#667eea;
 color:white;
-font-size:16px;
 cursor:pointer;
-margin-right:10px;
+margin-top:10px;
 }
 
 button:hover{
-background:#1a5ed8;
+background:#5a67d8;
+}
+
+.upload{
+border:2px dashed #667eea;
+padding:20px;
+text-align:center;
+cursor:pointer;
+border-radius:10px;
+margin-bottom:15px;
 }
 
 .progress{
-width:100%;
 background:#eee;
 border-radius:20px;
-margin-top:20px;
+margin-top:15px;
 }
 
 .bar{
-height:25px;
+height:20px;
+width:0%;
 background:#28a745;
 border-radius:20px;
 text-align:center;
 color:white;
-line-height:25px;
-width:0%;
+font-size:12px;
+}
+
+.hidden{
+display:none;
+}
+
+.logout{
+float:right;
+background:red;
 }
 
 #result{
-background:#f4f4f4;
-padding:20px;
 margin-top:20px;
-border-radius:8px;
-white-space:pre-line;
+}
+
+.card{
+background:#f9f9f9;
+padding:15px;
+margin-top:10px;
+border-radius:10px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
 }
 
 </style>
@@ -108,23 +112,36 @@ white-space:pre-line;
 
 <h2>AI Resume Shortlisting System</h2>
 
-<div class="description">
-This system analyzes resumes and compares them with job descriptions to calculate a skill match score and recommend missing skills.
+<!-- AUTH -->
+<div id="authSection">
+<h3>Login / Register</h3>
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+<button onclick="register()">Register</button>
+<button onclick="login()">Login</button>
 </div>
+
+<!-- APP -->
+<div id="appSection" class="hidden">
+
+<button class="logout" onclick="logout()">Logout</button>
+
+<h3>Upload Resume (PDF)</h3>
 
 <div class="upload" onclick="document.getElementById('resumeFile').click()">
-Click here to upload resume (.txt)
+Click to upload PDF Resume
 </div>
 
-<input type="file" id="resumeFile" style="display:none">
+<input type="file" id="resumeFile" accept="application/pdf" style="display:none">
 
 <h3>Or Paste Resume</h3>
-<textarea id="resume"></textarea>
+<textarea id="resume" placeholder="Paste resume here..."></textarea>
 
 <h3>Paste Job Description</h3>
-<textarea id="job"></textarea>
+<textarea id="job" placeholder="Paste job description here..."></textarea>
 
-<button onclick="analyze()">Analyze Resume</button> <button onclick="openGemini()">Analyze with Gemini AI</button>
+<button onclick="analyze()">Analyze Resume</button>
+<button onclick="openGemini()">Analyze with Gemini AI</button>
 
 <div class="progress">
 <div id="bar" class="bar">0%</div>
@@ -133,6 +150,11 @@ Click here to upload resume (.txt)
 <div id="result"></div>
 
 </div>
+
+</div>
+
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
 <script src="script.js"></script>
 
